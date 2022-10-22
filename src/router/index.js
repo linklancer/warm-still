@@ -33,7 +33,7 @@ import Layout from '@/layout'
 export const constantRoutes = [
   {
     path: '/login',
-    component: () => import('@/views/login/index'),
+    component: () => import('@/views/MyLogin/index'),
     hidden: true
   },
 
@@ -49,113 +49,122 @@ export const constantRoutes = [
     redirect: '/dashboard',
     children: [{
       path: 'dashboard',
-      name: 'Dashboard',
+      name: '首页',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '首页', icon: 'dashboard' }
     }]
   },
 
   {
-    path: '/example',
+    path: '/manange',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    redirect: '/manage/register',
+    name: 'Manage',
+    meta: { title: '管理平台', icon: 'manage' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: 'register',
+        name: 'Register',
+        component: () => import('@/views/manage/register'),
+        meta: { title: '学生注册审批', icon: 'register' }
       },
       {
-        path: 'tree',
+        path: 'sinformation',
+        name: 'Sinformation',
+        component: () => import('@/views/manage/sinformation'),
+        meta: { title: '学生信息管理', icon: 'sinformation' }
+      },
+      {
+        path: 'phydata',
+        name: 'Phydata',
+        component: () => import('@/views/manage/phydata'),
+        meta: { title: '心理数据管理', icon: 'phydata' }
+      },
+      {
+        path: 'activity',
         name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        component: () => import('@/views/manage/activity'),
+        meta: { title: '特色活动管理', icon: 'activity' }
       }
+
     ]
   },
-
   {
-    path: '/form',
+    path: '/role',
     component: Layout,
+    redirect: '/role/charactar',
+    name: 'Role',
+    meta: { title: '权限管理', icon: 'card' },
     children: [
       {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        path: 'charactar',
+        component: () => import('@/views/role/charactar'),
+        name: 'Charactar',
+        meta: { title: '角色管理', icon: 'approve' }
+      },
+      {
+        path: 'menu',
+        component: () => import('@/views/role/menu'),
+        name: 'Menu',
+        meta: { title: '菜单管理', icon: 'approve' }
+      },
+      {
+        path: 'resource',
+        component: () => import('@/views/role/resource'),
+        name: 'Resource',
+        meta: { title: '资源管理', icon: 'approve' }
+      }
+    ]
+  },
+  {
+    path: '/card',
+    component: Layout,
+    redirect: '/card/approve',
+    name: 'Example',
+    meta: { title: '身份认证管理', icon: 'card' },
+    children: [
+      {
+        path: 'approve',
+        component: () => import('@/views/card/approve/index'), // Parent router-view
+        name: 'Menu1',
+        meta: { title: '身份认证', icon: 'approve' }
+      },
+      {
+        path: 'accredit',
+        component: () => import('@/views/card/accredict/index'),
+        name: 'Menu2',
+        meta: { title: '身份授权', icon: 'accredit' }
       }
     ]
   },
 
   {
-    path: '/nested',
+    path: '/show',
     component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
+    redirect: '/show/menu1',
+    name: 'Show',
     meta: {
-      title: 'Nested',
-      icon: 'nested'
+      title: '展示平台',
+      icon: 'show'
     },
     children: [
       {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
+        path: 'datavis',
+        component: () => import('@/views/show/datavis/index'), // Parent router-view
+        name: 'Datavis',
+        meta: { title: '统计数据可视化', icon: 'datavis' }
       },
       {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
-      }
-    ]
-  },
-
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
+        path: 'issue',
+        component: () => import('@/views/show/issue/index'),
+        name: 'issue',
+        meta: { title: '心理活动与发布', icon: 'issue' }
+      },
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'warn',
+        component: () => import('@/views/show/warn/index'),
+        name: 'Warn',
+        meta: { title: '心理异常预警与研判', icon: 'warn' }
       }
     ]
   },
@@ -163,7 +172,7 @@ export const constantRoutes = [
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
-
+// 任意路由
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),

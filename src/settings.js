@@ -1,6 +1,8 @@
+// 此文件用来设置页面标签的
+
 module.exports = {
 
-  title: 'Vue Admin Template',
+  title: 'warm-still后台管理系统',
 
   /**
    * @type {boolean} true | false
