@@ -39,9 +39,10 @@ module.exports = {
     // 配置代理跨域
     proxy: {
       '/api': {
-        target: 'http://localhost:8081',
+        target: 'http://localhost:8081/',
         pathRewrite: { '^/api': '' }
       }
+
 
     }
 

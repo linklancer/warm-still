@@ -3,7 +3,7 @@ import store from './store'
 import { Message } from 'element-ui'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
-import { getToken, getUserInfo } from '@/utils/auth' // get token from cookie
+import {  getUserInfo } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
@@ -17,26 +17,26 @@ router.beforeEach(async(to, from, next) => {
   // 设置路由标题
   document.title = getPageTitle(to.meta.title)
 
-  // determine whether the user has logged in
-  const hasToken = getToken()
-  if (hasToken) {
+  // 取出用户信息
+  const hasuserinfo = getUserInfo() 
+  //如果本地用户名和用户id都存在，放行
+  if ( hasuserinfo) {
     if (to.path === '/login') {
-      // 如果已经登录，就跳转到首页
+      // 如果存在用户姓名和id，则就跳转到首页,放行
       next({ path: '/' })
       NProgress.done()
     } else {
+      //否则去vuex里面寻找id
       const hasGetUserId = store.getters.userinfo.userId
       if (hasGetUserId) {
         next()
       } else {
+        //如果没有.则
         try {
-          // 得到userid
-        //  const hasGetUserId =  getUserInfo()        //没有phone
-
           next()
         } catch (error) {
-          // 移除token,并且再次登录
-          await store.dispatch('user/resetToken')
+         //移除用户姓名与id
+          await store.dispatch('user/resetUserName')
           Message.error(error || 'Has Error')
           next(`/login?redirect=${to.path}`)
           NProgress.done()

@@ -8,7 +8,7 @@
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <!--:src="avatar+'?imageView2/1/w/80/h/80'"-->
-          <img src="@/assets/images/logo.gif" class="user-avatar">
+          <img :src="$store.state.user.imgurl" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
@@ -32,6 +32,11 @@ import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 
 export default {
+  data() {
+    return {
+      
+    }
+  },
   components: {
     Breadcrumb,
     Hamburger
@@ -47,8 +52,8 @@ export default {
       this.$store.dispatch('app/toggleSideBar')
     },
     async logout() {
-      // await this.$store.dispatch('user/logout')
-      this.$store.dispatch('user/resetToken')
+      await this.$store.dispatch('user/logout')
+      // this.$store.dispatch('user/resetToken')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
       this.$message({
         message: '退出成功',

@@ -100,6 +100,12 @@ export const constantRoutes = [
         path: 'charactar',
         component: () => import('@/views/role/charactar'),
         name: 'Charactar',
+        meta: { title: '用户管理', icon: 'approve' }
+      },
+      {
+        path: 'myrole',
+        component: () => import('@/views/role/myRole'),
+        name: 'myRole',
         meta: { title: '角色管理', icon: 'approve' }
       },
       {
